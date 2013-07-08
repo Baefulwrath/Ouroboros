@@ -1,17 +1,20 @@
 package ouroboros;
 
+import java.util.HashMap;
+
+import ouroboros.modes.*;
+
 import rendering.RenderingHandler;
 
 import assets.AssetHandler;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
 
-import static com.badlogic.gdx.Gdx.*;
+import static ouroboros.ProgramState.*;
 
 public class OS implements ApplicationListener {
-	public static ProgramState state = ProgramState.DEFAULT;
+	public static ProgramState state = DEFAULT;
+	public static HashMap<ProgramState, ProgramMode> modes = new HashMap<ProgramState, ProgramMode>();
 	public static boolean paused = false;
 	public static boolean exitProgram = false;
 	
@@ -23,6 +26,14 @@ public class OS implements ApplicationListener {
 	public void create() {
 		RenderingHandler.setup();
 		AssetHandler.setup();
+		setupModes();
+	}
+	
+	public void setupModes(){
+		modes.put(DEFAULT, new MODE_DEFAULT(DEFAULT));
+		modes.put(MENU, new MODE_MENU(MENU));
+		modes.put(GAME, new MODE_GAME(GAME));
+		modes.put(EDITOR, new MODE_EDITOR(EDITOR));
 	}
 
 	@Override
@@ -31,6 +42,7 @@ public class OS implements ApplicationListener {
 		AssetHandler.dispose();
 	}
 
+//A better name for this method would be "update" but you can blame LibGdx for this one.
 	@Override
 	public void render(){
 		if(exitProgram){
@@ -49,12 +61,16 @@ public class OS implements ApplicationListener {
 	public void updateSpecific(){
 		switch(state){
 			case DEFAULT:
+				modes.get(DEFAULT).update();
 				break;
 			case MENU:
+				modes.get(MENU).update();
 				break;
 			case EDITOR:
+				modes.get(EDITOR).update();
 				break;
 			case GAME:
+				modes.get(GAME).update();
 				break;
 		}
 	}
