@@ -7,6 +7,7 @@ import java.util.HashMap;
 import ouroboros.modes.*;
 
 import rendering.RenderingHandler;
+import ui.UIHandler;
 
 import assets.AssetHandler;
 
@@ -33,6 +34,7 @@ public class OS implements ApplicationListener {
 		setupModes();
 		inputhandler.setup();
 		input.setInputProcessor(inputhandler);
+		UIHandler.setup();
 	}
 	
 	public void setupModes(){
@@ -46,6 +48,7 @@ public class OS implements ApplicationListener {
 	public void dispose() {
 		RenderingHandler.dispose();
 		AssetHandler.dispose();
+		UIHandler.dispose();
 	}
 
 //A better name for this method would be "update" but you can blame LibGdx for this one.
