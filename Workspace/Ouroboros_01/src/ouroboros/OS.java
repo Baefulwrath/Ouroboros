@@ -1,5 +1,7 @@
 package ouroboros;
 
+import input.InputHandler;
+
 import java.util.HashMap;
 
 import ouroboros.modes.*;
@@ -9,6 +11,7 @@ import rendering.RenderingHandler;
 import assets.AssetHandler;
 
 import com.badlogic.gdx.ApplicationListener;
+import static com.badlogic.gdx.Gdx.*;
 
 import static ouroboros.ProgramState.*;
 
@@ -17,6 +20,7 @@ public class OS implements ApplicationListener {
 	public static HashMap<ProgramState, ProgramMode> modes = new HashMap<ProgramState, ProgramMode>();
 	public static boolean paused = false;
 	public static boolean exitProgram = false;
+	public static InputHandler inputhandler = new InputHandler();
 	
 	public OS(ProgramState startupState){
     	state = startupState;
@@ -27,6 +31,8 @@ public class OS implements ApplicationListener {
 		RenderingHandler.setup();
 		AssetHandler.setup();
 		setupModes();
+		inputhandler.setup();
+		input.setInputProcessor(inputhandler);
 	}
 	
 	public void setupModes(){

@@ -1,5 +1,7 @@
 package rendering;
 
+import ouroboros.ProgramState;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -14,7 +16,11 @@ public abstract class Renderer {
 	public abstract void loadSpecificResources();
 	public abstract void mobileRender();
 	public abstract void staticRender();
-	public String ID = "NOID";
+	public ProgramState state = ProgramState.DEFAULT;
+	
+	public Renderer(ProgramState s){
+		state = s;
+	}
 
     protected void drawImage(Sprite sprite, float x, float y, float w, float h) {
     	drawImage(sprite, x, y, w, h, 0, false, Color.WHITE, 1.0f, false);

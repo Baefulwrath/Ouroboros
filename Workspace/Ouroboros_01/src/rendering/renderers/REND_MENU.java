@@ -1,5 +1,6 @@
 package rendering.renderers;
 
+import ouroboros.ProgramState;
 import assets.AssetHandler;
 
 import com.badlogic.gdx.graphics.Color;
@@ -7,10 +8,10 @@ import com.badlogic.gdx.graphics.Color;
 import rendering.Renderer;
 import rendering.RenderingHandler;
 
-public class REND_test extends Renderer{
+public class REND_MENU extends Renderer{
 
-	public REND_test(){
-		ID = "test";
+	public REND_MENU(ProgramState s){
+		super(s);
 	}
 
 	@Override

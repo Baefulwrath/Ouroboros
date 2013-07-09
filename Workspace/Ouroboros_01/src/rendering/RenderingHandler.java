@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ouroboros.OS;
+import ouroboros.ProgramNode;
 import static ouroboros.ProgramState.*;
 import ouroboros.ProgramState;
-import rendering.renderers.REND_test;
+import rendering.renderers.*;
 
 import static com.badlogic.gdx.Gdx.*;
 import static com.badlogic.gdx.graphics.GL10.*;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class RenderingHandler {
+public class RenderingHandler extends ProgramNode{
 	public static float w = 0;
 	public static float h = 0;
 	public static float zoom = graphics.getWidth() * 2;
@@ -46,7 +47,10 @@ public class RenderingHandler {
 	}
     
 	public static void setupRenderers(){
-		renderers.put(ProgramState.DEFAULT, new REND_test());
+		renderers.put(ProgramState.DEFAULT, new REND_DEFAULT(ProgramState.DEFAULT));
+		renderers.put(ProgramState.MENU, new REND_MENU(ProgramState.MENU));
+		renderers.put(ProgramState.GAME, new REND_GAME(ProgramState.GAME));
+		renderers.put(ProgramState.EDITOR, new REND_EDITOR(ProgramState.EDITOR));
 	}
 	
 	public static void render(){

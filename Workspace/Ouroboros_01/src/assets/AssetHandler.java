@@ -4,13 +4,15 @@ import static com.badlogic.gdx.Gdx.*;
 
 import java.util.HashMap;
 
+import ouroboros.ProgramNode;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
-public class AssetHandler {
+public class AssetHandler extends ProgramNode{
     
     private static HashMap<String, BitmapFont> fonts = new HashMap<String, BitmapFont>();
     
