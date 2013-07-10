@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import rendering.Renderer;
 import rendering.RenderingHandler;
+import ui.UIHandler;
 
 public class REND_DEFAULT extends Renderer{
 
@@ -25,6 +26,8 @@ public class REND_DEFAULT extends Renderer{
 	@Override
 	public void staticRender() {
 		drawImage(RenderingHandler.testImg, 0, 0, RenderingHandler.w, RenderingHandler.h, 0, true, Color.WHITE, 1.0f, true);
+		drawMessages(UIHandler.messages, RenderingHandler.getScreenX(), -RenderingHandler.getScreenY(), false);
+		drawMenu(UIHandler.getMenu());
 	}
 	
 }

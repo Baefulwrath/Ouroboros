@@ -7,6 +7,7 @@ import java.util.HashMap;
 import ouroboros.modes.*;
 
 import rendering.RenderingHandler;
+import scripting.ScriptHandler;
 import ui.UIHandler;
 
 import assets.AssetHandler;
@@ -35,6 +36,7 @@ public class OS implements ApplicationListener {
 		inputhandler.setup();
 		input.setInputProcessor(inputhandler);
 		UIHandler.setup();
+		ScriptHandler.setup();
 	}
 	
 	public void setupModes(){
@@ -49,9 +51,10 @@ public class OS implements ApplicationListener {
 		RenderingHandler.dispose();
 		AssetHandler.dispose();
 		UIHandler.dispose();
+		ScriptHandler.dispose();
 	}
 
-//A better name for this method would be "update" but you can blame LibGdx for this one.
+//A better name for this method would be "update", you can blame LibGdx for this.
 	@Override
 	public void render(){
 		if(exitProgram){
@@ -85,6 +88,8 @@ public class OS implements ApplicationListener {
 	}
 	
 	public void updateGeneral(){
+		UIHandler.update(InputHandler.staticMouse);
+		ScriptHandler.update();
 		RenderingHandler.render();
 	}
 

@@ -1,5 +1,7 @@
 package ui;
 
+import input.Pointer;
+
 import java.awt.Rectangle;
 
 public abstract class UIObject {
@@ -8,28 +10,27 @@ public abstract class UIObject {
 	public boolean RENDERTITLE = false;
 	public String TITLE = "UNTITLED";
 	public String SCRIPT = "";
-	public int TITLEX = 0;
-	public int TITLEY = 0;
 	
 	
 	public UIObject(String title, String script, int x, int y, int w, int h){
 		TITLE = title;
 		SCRIPT = script;
 		BOX = new Rectangle(x, y, w, h);
-		setup();
 	}
 	
 	public UIObject(String title, String script, Rectangle r){
 		TITLE = title;
 		SCRIPT = script;
 		BOX = r;
-		setup();
 	}
 	
-	public void update(){
+	public void update(Pointer p){
 		clear();
 		content();
+		typeUpdate(p);
 	}
+	
+	public abstract void typeUpdate(Pointer p);
 
 	protected abstract void content();
 

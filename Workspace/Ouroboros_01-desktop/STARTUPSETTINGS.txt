@@ -1,8 +1,8 @@
 title Ouroboros Engine Alpha
 useGL20 false
-width 320
-height 240
-resizable true
+width 1280
+height 720
+resizable false
 fullscreen false
 getSystemRes true
 startupState DEFAULT
