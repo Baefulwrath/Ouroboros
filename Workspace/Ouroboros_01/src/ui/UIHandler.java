@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import ouroboros.NodeType;
 import ouroboros.ProgramNode;
+import rendering.RenderingHandler;
 
 import ui.menus.*;
 
@@ -17,10 +18,12 @@ public class UIHandler extends ProgramNode{
 	public static HashMap<String, Menu> menus = new HashMap<String, Menu>();
 	public static ArrayList<Message> messages = new ArrayList<Message>();
 	public static String currentMenu = "";
+	public static String defaultMenu = "main";
 	
 	public static void setup(){
 		menus.put("main", new MENU_main());
-		currentMenu = "main";
+		menus.put("about", new MENU_about());
+		setMenu(defaultMenu);
 	}
 
 	public static boolean intersects(Rectangle r) {
@@ -36,7 +39,16 @@ public class UIHandler extends ProgramNode{
 	}
 
 	public static Menu getMenu() {
-		return menus.get(currentMenu);
+		return getMenu(currentMenu);
+	}
+
+	public static Menu getMenu(String id) {
+		if(menus.containsKey(id)){
+			return menus.get(id);
+		}else{
+			print("Menu not found, returning default menu...");
+			return menus.get(defaultMenu);
+		}
 	}
 	
 	public static void update(Pointer p){
@@ -55,8 +67,7 @@ public class UIHandler extends ProgramNode{
 	}
 	
 	public static void print(String s){
-		System.out.println(s);
-		messages.add(new Message(s, 4000));
+		print(s, 4000);
 	}
 	
 	public static void print(String s, int time){
@@ -74,6 +85,19 @@ public class UIHandler extends ProgramNode{
     			break;
     		}
     	}
+	}
+
+	public static void setMenu(String id) {
+		if(menus.containsKey(id)){
+			currentMenu = id;
+		}else{
+			print("Menu does not exist");
+		}
+	}
+
+	public static void setDefaultMenu(String defMenu) {
+		defaultMenu = defMenu;
+		System.out.println(defaultMenu);
 	}
 	
 }

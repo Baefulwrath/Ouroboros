@@ -17,9 +17,8 @@ public class MENU_main extends Menu{
 	protected void setup() {
 		addButton("test test", "print_test", 100, 30, AssetHandler.basicButtonStyle);
 		addButton("test test", "print_test", 100, 30, AssetHandler.basicButtonStyle);
-		addButton("test test", "print_test", 100, 30, AssetHandler.basicButtonStyle);
-		addButton("test test", "print_test", 100, 30, AssetHandler.basicButtonStyle);
-		addButton("test test", "print_test", 100, 30, AssetHandler.basicButtonStyle);
+		addTextArea("test label jskjdljdslfjsaskjdalsjdlawkjdawkmddmaksdmwkasjdw", 100, 30, AssetHandler.basicLabelStyle);
+		addButton("About", "setMenu_about", 100, 30, AssetHandler.basicButtonStyle);
 	}
 	
 }

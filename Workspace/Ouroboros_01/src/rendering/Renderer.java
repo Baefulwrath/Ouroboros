@@ -7,6 +7,7 @@ import ouroboros.ProgramState;
 import ui.Menu;
 import ui.Button;
 import ui.Message;
+import ui.TextArea;
 
 import assets.AssetHandler;
 
@@ -127,6 +128,7 @@ public abstract class Renderer {
     
     protected void drawMenu(Menu m){
     	drawButtons(m.buttons, m.OPACITY);
+    	drawTextAreas(m.textAreas, m.OPACITY);
     	if(m.RENDERTITLE){
     		drawString(m.TITLE, m.BOX.x, m.BOX.y, AssetHandler.titleLabelStyle, 1.0f);
     		drawString("_____________________", m.BOX.x, m.BOX.y - 6, AssetHandler.titleLabelStyle, 1.0f);
@@ -141,6 +143,18 @@ public abstract class Renderer {
     		}else{
     			drawString(m.get(i).TEXT, x, y - (i * (style.font.getCapHeight() + 3)) - style.font.getCapHeight(), style, 0.5f);
     		}
+    	}
+    }
+    
+    protected void drawTextAreas(ArrayList<TextArea> t, float opacity){
+    	for(int i = 0; i < t.size(); i++){
+    		drawTextArea(t.get(i), opacity);
+    	}
+    }
+    
+    protected void drawTextArea(TextArea ta, float opacity){
+    	for(int i = 0; i < ta.TEXT.length; i++){
+    		ta.TEXT[i].draw(batch, opacity);
     	}
     }
 }

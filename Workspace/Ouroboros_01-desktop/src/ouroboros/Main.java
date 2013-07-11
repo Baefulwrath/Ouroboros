@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -21,10 +22,11 @@ public class Main {
 			cfg.height = dim.height;
 		}
 		
-		new LwjglApplication(new OS(startupState), cfg);
+		new LwjglApplication(new OS(startupState, defaultMenu), cfg);
 	}
 	
 	public static boolean getSystemRes = false;
+	public static String defaultMenu = "main";
 	public static ProgramState startupState = ProgramState.DEFAULT;
 	
 	public static void loadStartupSettings(LwjglApplicationConfiguration cfg){
@@ -38,6 +40,7 @@ public class Main {
 			cfg.fullscreen = Boolean.parseBoolean(reader.nextLine().substring(11));
 			getSystemRes = Boolean.parseBoolean(reader.nextLine().substring(13));
 			startupState = ProgramState.parseState(reader.nextLine().substring(13));
+			defaultMenu =  reader.nextLine().substring(12);
 			reader.close();
 		}catch(Exception ex){
 			ex.printStackTrace(System.out);

@@ -24,8 +24,9 @@ public class OS implements ApplicationListener {
 	public static boolean exitProgram = false;
 	public static InputHandler inputhandler = new InputHandler();
 	
-	public OS(ProgramState startupState){
+	public OS(ProgramState startupState, String defaultMenu){
     	state = startupState;
+    	UIHandler.setDefaultMenu(defaultMenu);
     }
 	
 	@Override

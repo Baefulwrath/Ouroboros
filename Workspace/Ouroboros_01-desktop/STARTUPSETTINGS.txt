@@ -6,3 +6,4 @@ resizable false
 fullscreen false
 getSystemRes true
 startupState DEFAULT
+defaultMenu main

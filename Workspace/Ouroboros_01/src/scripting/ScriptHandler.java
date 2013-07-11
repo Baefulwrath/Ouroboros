@@ -9,6 +9,7 @@ import ouroboros.NodeType;
 import ouroboros.OS;
 import ouroboros.ProgramNode;
 import ui.UIHandler;
+import scripting.scripts.*;
 
 public class ScriptHandler extends ProgramNode{
     private static InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -16,10 +17,11 @@ public class ScriptHandler extends ProgramNode{
     private static boolean initialized = false;
     private static HashMap<String, Integer> genInts = new HashMap<String, Integer>();
     private static ArrayList<String> lines = new ArrayList<String>();
-    private static long lastUpdate = 0;
+    private static HashMap<String, Script> scripts = new HashMap<String, Script>();
     
     public static void setup(){
     	loadGenericVariables();
+    	loadScripts();
     	initialized = true;
     }
     
@@ -44,6 +46,14 @@ public class ScriptHandler extends ProgramNode{
     }
     
     public static void loadGenericVariables(){
+    }
+    
+    public static void loadScripts(){
+    	scripts.put("exit_", new SCRIPT_exit());
+    	scripts.put("print_", new SCRIPT_print());
+    	scripts.put("setMenu_", new SCRIPT_setMenu());
+    	scripts.put("setState_", new SCRIPT_setState());
+    	scripts.put("test_", new SCRIPT_test());
     }
 
     public static void handleScript(String script) {
@@ -111,38 +121,8 @@ public class ScriptHandler extends ProgramNode{
 
     public static void readLine(String line) {
         String cmd = line.substring(0, line.indexOf("_") + 1);
-        if (line.length() == 5) {
-            if (cmd.equals("exit_")) {
-            	OS.exitProgram = true;
-            }
-        }
-        if (line.length() == 5) {
-            if (cmd.equals("test_")) {
-                System.out.println("Test successful!");
-            }
-        }
-        if (line.length() > 9) {
-            if (cmd.equals("openMenu_")) {
-                openMenu(line);
-            }
-        }
-        if (line.length() > 6) {
-            if (cmd.equals("print_")) {
-            	UIHandler.print(line.substring(6));
-            }
-        }
-        if (line.length() > 9) {
-            if (cmd.equals("setState_")) {
-                setState(line.substring(9));
-            }
-        }
+        line = line.substring(line.indexOf("_") + 1);
+        scripts.get(cmd).activate(line);
+        
     }
-
-	private static void setState(String s) {
-		OS.changeState(s);
-	}
-
-	private static void openMenu(String id) {
-		UIHandler.currentMenu = id;
-	}
 }
