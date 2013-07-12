@@ -16,7 +16,7 @@ public class HUD_test extends Hud{
 	@Override
 	protected void setup() {
 		addNinePatch(AssetHandler.basicHud, BOX.x, BOX.y, BOX.width, BOX.height);
-		addButton("test button", "print_yeah!", 0, 0, 100, 40, AssetHandler.basicButtonStyle);
+		addButton("test button", "print_yes", 0, 0, 100, 40, AssetHandler.basicButtonStyle);
 	}
 
 }

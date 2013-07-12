@@ -107,4 +107,42 @@ public abstract class Hud extends UIObject{
 	public void addTileImage(int tex, boolean block, int x, int y, int w, int h){
 		tileImages.add(new TileImage(tex, block, x, y, w, h));
 	}
+
+	@Override
+	public void touchDown() {
+		for(int i = 0; i < buttons.size(); i++){
+			buttons.get(i).ready();
+		}
+	}
+
+	@Override
+	public void touchUp() {
+		for(int i = 0; i < buttons.size(); i++){
+			buttons.get(i).setActive();
+		}
+	}
+	
+	@Override
+	public boolean intersects(Rectangle r){
+		boolean temp = false;
+		if(BOX.intersects(r)){
+			temp = true;
+		}else{
+			for(int i = 0; i < buttons.size(); i++){
+				if(buttons.get(i).intersects(r)){
+					temp = true;
+					break;
+				}
+			}
+			if(!temp){
+				for(int i = 0; i < collisionAreas.size(); i++){
+					if(collisionAreas.get(i).intersects(r)){
+						temp = true;
+						break;
+					}
+				}
+			}
+		}
+		return temp;
+	}
 }

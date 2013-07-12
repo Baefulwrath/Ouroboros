@@ -98,7 +98,8 @@ public abstract class Menu extends UIObject{
 		}
 		return temp;
 	}
-
+	
+	@Override
 	public boolean intersects(Rectangle r){
 		boolean temp = false;
 		if(BOX.intersects(r)){
@@ -121,12 +122,14 @@ public abstract class Menu extends UIObject{
 		}
 	}
 
+	@Override
 	public void touchDown() {
 		for(int i = 0; i < buttons.size(); i++){
 			buttons.get(i).ready();
 		}
 	}
 
+	@Override
 	public void touchUp() {
 		for(int i = 0; i < buttons.size(); i++){
 			buttons.get(i).setActive();

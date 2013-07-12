@@ -38,4 +38,10 @@ public abstract class UIObject {
 	}
 
 	protected abstract void setup();
+	
+	public abstract void touchDown();
+
+	public abstract void touchUp();
+
+	public abstract boolean intersects(Rectangle r);
 }

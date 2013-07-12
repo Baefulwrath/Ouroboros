@@ -44,6 +44,15 @@ public class UIHandler extends ProgramNode{
 		if(getMenu().intersects(r)){
 			temp = true;
 		}
+		if(!temp){
+			Hud[] h = getHuds();
+			for(int i = 0; i < h.length; i++){
+				if(h[i].intersects(r)){
+					temp = true;
+					break;
+				}
+			}
+		}
 		return temp;
 	}
 
@@ -100,10 +109,18 @@ public class UIHandler extends ProgramNode{
 
 	public static void touchDown() {
 		getMenu().touchDown();
+		Hud[] h = getHuds();
+		for(int i = 0; i < h.length; i++){
+			h[i].touchDown();
+		}
 	}
 	
 	public static void touchUp() {
 		getMenu().touchUp();
+		Hud[] h = getHuds();
+		for(int i = 0; i < h.length; i++){
+			h[i].touchUp();
+		}
 	}
 	
 	public static void print(String s){
