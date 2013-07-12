@@ -5,25 +5,38 @@ import input.Pointer;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import ouroboros.NodeType;
 import ouroboros.ProgramNode;
-import rendering.RenderingHandler;
 
+import ui.huds.*;
 import ui.menus.*;
 
 
 public class UIHandler extends ProgramNode{
 	
 	public static HashMap<String, Menu> menus = new HashMap<String, Menu>();
+	public static HashMap<String, Hud> huds = new HashMap<String, Hud>();
 	public static ArrayList<Message> messages = new ArrayList<Message>();
 	public static String currentMenu = "";
 	public static String defaultMenu = "main";
+	public static String currentHudGroup = "";
 	
 	public static void setup(){
+		setupMenus();
+		setupHuds();
+	}
+	
+	public static void setupMenus(){
 		menus.put("main", new MENU_main());
 		menus.put("about", new MENU_about());
 		setMenu(defaultMenu);
+	}
+	
+	public static void setupHuds(){
+		huds.put("test", new HUD_test());
+		currentHudGroup = "test";
 	}
 
 	public static boolean intersects(Rectangle r) {
@@ -41,7 +54,7 @@ public class UIHandler extends ProgramNode{
 	public static Menu getMenu() {
 		return getMenu(currentMenu);
 	}
-
+	
 	public static Menu getMenu(String id) {
 		if(menus.containsKey(id)){
 			return menus.get(id);
@@ -51,10 +64,37 @@ public class UIHandler extends ProgramNode{
 		}
 	}
 	
+	public static Hud[] getHuds(){
+		return getHuds(currentHudGroup);
+	}
+	
+	public static Hud[] getHuds(String group){
+		ArrayList<Hud> hal = new ArrayList<Hud>();
+	    for(Map.Entry<String, Hud> entry : huds.entrySet()){
+	    	Hud h = huds.get(entry.getKey());
+			if(h.contains(group)){
+				hal.add(h);
+			}
+		}
+		Hud[] har = new Hud[hal.size()];
+	    for(int i = 0; i < hal.size(); i++){
+	    	har[i] = hal.get(i);
+	    }
+	    return har;
+	}
+	
 	public static void update(Pointer p){
 		if(readyToUpdate(25, NodeType.UIHANDLER)){
 			getMenu().update(p);
 			updateMessages();
+			updateHuds(p);
+		}
+	}
+
+	private static void updateHuds(Pointer p) {
+		Hud[] h = getHuds();
+		for(int i = 0; i < h.length; i++){
+			h[i].update(p);
 		}
 	}
 

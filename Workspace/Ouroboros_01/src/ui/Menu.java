@@ -85,7 +85,7 @@ public abstract class Menu extends UIObject{
 		}
 		for(int i = 0; i < textAreas.size(); i++){
 			for(int i2 = 0; i2 < textAreas.get(i).TEXT.length; i2++){
-				y -= textAreas.get(i).TEXT[i2].getHeight() + itemInterval;
+				y -= textAreas.get(i).getHeight() + itemInterval;
 			}
 		}
 		return y;

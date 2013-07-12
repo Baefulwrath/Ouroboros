@@ -9,10 +9,10 @@ public enum UIOType {
         return super.toString();
     }
     
-    public static UIOType parseState(String state){
+    public static UIOType parseType(String type){
     	UIOType temp = DEFAULT;
     	for(int i = 0; i < values().length; i++){
-    		if(state.equals(values()[i].toString())){
+    		if(type.equals(values()[i].toString())){
     			temp = values()[i];
     		}
     	}

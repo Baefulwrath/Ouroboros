@@ -32,6 +32,8 @@ public class Button {
 		hoverCheck(p);
 		if(ACTIVE && HOVER){
 			activate();
+		}else{
+			ACTIVE = false;
 		}
 	}
 	

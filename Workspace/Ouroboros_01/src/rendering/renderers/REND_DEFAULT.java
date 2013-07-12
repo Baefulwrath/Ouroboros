@@ -28,6 +28,7 @@ public class REND_DEFAULT extends Renderer{
 		drawImage(RenderingHandler.testImg, 0, 0, RenderingHandler.w, RenderingHandler.h, 0, true, Color.WHITE, 1.0f, true);
 		drawMessages(UIHandler.messages, RenderingHandler.getScreenX(), -RenderingHandler.getScreenY(), false);
 		drawMenu(UIHandler.getMenu());
+		drawHuds(UIHandler.getHuds());
 	}
 	
 }

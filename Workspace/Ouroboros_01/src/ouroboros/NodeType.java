@@ -8,7 +8,7 @@ public enum NodeType {
         return super.toString();
     }
     
-    public static NodeType parseState(String type){
+    public static NodeType parseType(String type){
     	NodeType temp = DEFAULT;
     	for(int i = 0; i < values().length; i++){
     		if(type.equals(values()[i].toString())){

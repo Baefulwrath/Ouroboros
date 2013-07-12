@@ -44,5 +44,9 @@ public class TextArea {
 	private int getLabelY(int i, int h){
 		return -(i * (h + 10));
 	}
+
+	public int getHeight() {
+		return BOX.height;
+	}
 	
 }

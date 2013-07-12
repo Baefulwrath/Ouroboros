@@ -4,12 +4,16 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import ouroboros.ProgramState;
+import ui.Hud;
 import ui.Menu;
 import ui.Button;
 import ui.Message;
 import ui.TextArea;
+import universe.Tile;
 
 import assets.AssetHandler;
+import assets.NinePatchImage;
+import assets.TileImage;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -117,7 +121,7 @@ public abstract class Renderer {
     
     protected void drawButton(Button b, float opacity){
     	drawNinePatch(b.getTex(), b.BOX, Color.WHITE);
-    	drawString(b.TITLE, b.BOX.x + b.TITLEX, b.BOX.y + b.getTextY(), b.getLabelStyle(), opacity);
+    	drawString(b.TITLE + " - " + b.ACTIVE + " - " + b.HOVER + " - " + b.READY, b.BOX.x + b.TITLEX, b.BOX.y + b.getTextY(), b.getLabelStyle(), opacity);
     }
     
     protected void drawButtons(ArrayList<Button> bs, float opacity){
@@ -156,5 +160,64 @@ public abstract class Renderer {
     	for(int i = 0; i < ta.TEXT.length; i++){
     		ta.TEXT[i].draw(batch, opacity);
     	}
+    }
+    
+    protected void drawHud(Hud h){
+    	drawLabels(h.labels, h.OPACITY);
+    	drawTextAreas(h.textAreas, h.OPACITY);
+    	drawButtons(h.buttons, h.OPACITY);
+    	drawNinePatchImages(h.ninePatches);
+    	drawTileImages(h.tileImages, h.OPACITY);
+    	if(h.RENDERTITLE){
+    		drawString(h.TITLE, h.BOX.x, h.BOX.y, AssetHandler.titleLabelStyle, h.OPACITY);
+    	}
+    }
+    
+    protected void drawHuds(Hud[] h){
+    	for(int i = 0; i < h.length; i++){
+    		drawHud(h[i]);
+    	}
+    }
+    
+    protected void drawLabels(ArrayList<Label> l, float opacity){
+    	for(int i = 0; i < l.size(); i++){
+    		drawLabel(l.get(i), opacity);
+    	}
+    }
+    
+    protected void drawLabel(Label l, float opacity){
+    	l.draw(batch, opacity);
+    }
+    
+    protected void drawNinePatches(ArrayList<NinePatch> nps, int x, int y, int w, int h){
+    	for(int i = 0; i < nps.size(); i++){
+    		drawNinePatch(nps.get(i), x, y, w, h);
+    	}
+    }
+    
+    protected void drawNinePatchImages(ArrayList<NinePatchImage> nps){
+    	for(int i = 0; i < nps.size(); i++){
+    		NinePatchImage n = nps.get(i);
+    		drawNinePatch(n.N, n.X, n.W, n.W, n.H);
+    	}
+    }
+    
+    protected void drawNinePatch(NinePatch n, int x, int y, int w, int h){
+    	n.draw(batch, x, y, w, h);
+    }
+    
+    protected void drawTileImages(ArrayList<TileImage> ti, float opacity){
+    	for(int i = 0; i < ti.size(); i++){
+    		drawTileImage(ti.get(i), opacity);
+    	}
+    }
+    
+    protected void drawTileImage(TileImage t, float opacity){
+    	drawTile(t, t.BOX.x, t.BOX.y, t.BOX.width, t.BOX.height, opacity);
+    }
+    
+    protected void drawTile(Tile t, int x, int y, int w, int h, float opacity){
+//SKRIV FÄRDIGT KODEN HÄR.
+    	drawString("TILE", x, y, AssetHandler.debugLabelStyle, opacity);
     }
 }
