@@ -3,6 +3,7 @@ package ui;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
@@ -10,15 +11,33 @@ public class TextArea {
 	public Rectangle BOX = new Rectangle();
 	public int rowLength = 20;
 	public Label[] TEXT = new Label[0];
+	public boolean RENDERBACKGROUND = false;
+	public Sprite BACKGROUND;
 	
 	public TextArea(String t, int x, int y, int w, int h, LabelStyle ls){
 		TEXT = getArea(t, x, y, h, ls);
 		BOX = new Rectangle(x, y, w, h);
+		RENDERBACKGROUND = false;
 	}
 	
 	public TextArea(Label[] t, Rectangle r){
 		TEXT = t;
 		BOX = r;
+		RENDERBACKGROUND = false;
+	}
+	
+	public TextArea(String t, int x, int y, int w, int h, LabelStyle ls, Sprite back){
+		TEXT = getArea(t, x, y, h, ls);
+		BOX = new Rectangle(x, y, w, h);
+		BACKGROUND = back;
+		RENDERBACKGROUND = true;
+	}
+	
+	public TextArea(Label[] t, Rectangle r, Sprite back){
+		TEXT = t;
+		BOX = r;
+		BACKGROUND = back;
+		RENDERBACKGROUND = true;
 	}
 	
 	private Label[] getArea(String t, int x, int y, int h, LabelStyle ls){

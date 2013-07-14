@@ -11,6 +11,8 @@ import ui.Message;
 import ui.TextArea;
 import universe.Tile;
 
+import assets.AnimatedImage;
+import assets.AnimatedNinePatch;
 import assets.AssetHandler;
 import assets.NinePatchImage;
 import assets.TileImage;
@@ -29,17 +31,54 @@ public abstract class Renderer {
 	public abstract void mobileRender();
 	public abstract void staticRender();
 	public ProgramState state = ProgramState.DEFAULT;
+	private boolean defCentered = false;
+	private boolean defSmooth = false;
+	private int defRotation = 0;
+	private float defOpacity = 1.0f;
 	
 	public Renderer(ProgramState s){
 		state = s;
 	}
+	
+	protected void drawAnimatedImage(AnimatedImage a){
+		Sprite s = a.getImage();
+		drawAnimatedImage(a, s.getX(), s.getY(), s.getWidth(), s.getHeight());
+	}
+	
+	protected void drawAnimatedImage(AnimatedImage a, float x, float y, float w, float h){
+		drawAnimatedImage(a, x, y, w, h, defRotation);
+	}
+	
+	protected void drawAnimatedImage(AnimatedImage a, float x, float y, float w, float h, int rotation){
+		drawAnimatedImage(a, x, y, w, h, rotation, defSmooth, Color.WHITE, defOpacity, defCentered);
+	}
+	
+	protected void drawAnimatedImage(AnimatedImage a, Rectangle r, int rotation){
+		drawAnimatedImage(a, r.x, r.y, r.width, r.height, rotation);
+	}
+	
+	protected void drawAnimatedImage(AnimatedImage a, Rectangle r){
+		drawAnimatedImage(a, r.x, r.y, r.width, r.height, defRotation);
+	}
+
+    protected void drawAnimatedImage(AnimatedImage a, Rectangle r, int rotation, boolean smooth, Color tint, float opacity, boolean centered) {
+    	drawAnimatedImage(a, r.x, r.y, r.width, r.height, rotation, smooth, tint, opacity, centered);
+    }
+	
+	protected void drawAnimatedImage(AnimatedImage a, float x, float y, float w, float h, int rotation, boolean smooth, Color tint, float opacity, boolean centered){
+		drawImage(a.getImage(), x, y, w, h, rotation, smooth, tint, opacity, centered);
+	}
+	
+	protected void drawAnimatedImage(AnimatedImage a, float x, float y, float scale, int rotation, boolean smooth, Color tint, float opacity, boolean centered){
+		drawImage(a.getImage(), x, y, scale, rotation, smooth, tint, opacity, centered);
+	}
 
     protected void drawImage(Sprite sprite, float x, float y, float w, float h) {
-    	drawImage(sprite, x, y, w, h, 0, false, Color.WHITE, 1.0f, false);
+    	drawImage(sprite, x, y, w, h, defRotation, defSmooth, Color.WHITE, defOpacity, defCentered);
     }
 
     protected void drawImage(Sprite sprite, float x, float y, float w, float h, int rotation) {
-    	drawImage(sprite, x, y, w, h, rotation, false, Color.WHITE, 1.0f, false);
+    	drawImage(sprite, x, y, w, h, rotation, defSmooth, Color.WHITE, defOpacity, defCentered);
     }
 
     protected void drawImage(Sprite sprite, Rectangle r, int rotation) {
@@ -119,6 +158,31 @@ public abstract class Renderer {
     	img.draw(batch, box.x, box.y, box.width, box.height);
     }
     
+    protected void drawNinePatches(ArrayList<NinePatch> nps, int x, int y, int w, int h){
+    	for(int i = 0; i < nps.size(); i++){
+    		drawNinePatch(nps.get(i), x, y, w, h);
+    	}
+    }
+    
+    protected void drawNinePatchImages(ArrayList<NinePatchImage> nps){
+    	for(int i = 0; i < nps.size(); i++){
+    		NinePatchImage n = nps.get(i);
+    		drawNinePatchImage(n);
+    	}
+    }
+    
+    protected void drawNinePatch(NinePatch n, float x, float y, float w, float h){
+    	drawNinePatch(n, x, y, w, h, Color.WHITE);
+    }
+    
+    protected void drawAnimatedNinePatch(AnimatedNinePatch a){
+    	drawNinePatchImage(a.getImage());
+    }
+    
+    protected void drawNinePatchImage(NinePatchImage n){
+    	drawNinePatch(n.N, n.BOX.x, n.BOX.y, n.BOX.width, n.BOX.height);
+    }
+    
     protected void drawButton(Button b, float opacity){
     	drawNinePatch(b.getTex(), b.BOX, Color.WHITE);
     	drawString(b.TITLE + " - " + b.ACTIVE + " - " + b.HOVER + " - " + b.READY, b.BOX.x + b.TITLEX, b.BOX.y + b.getTextY(), b.getLabelStyle(), opacity);
@@ -157,6 +221,9 @@ public abstract class Renderer {
     }
     
     protected void drawTextArea(TextArea ta, float opacity){
+    	if(ta.RENDERBACKGROUND){
+    		drawImage(ta.BACKGROUND, ta.BOX);
+    	}
     	for(int i = 0; i < ta.TEXT.length; i++){
     		ta.TEXT[i].draw(batch, opacity);
     	}
@@ -187,23 +254,6 @@ public abstract class Renderer {
     
     protected void drawLabel(Label l, float opacity){
     	l.draw(batch, opacity);
-    }
-    
-    protected void drawNinePatches(ArrayList<NinePatch> nps, int x, int y, int w, int h){
-    	for(int i = 0; i < nps.size(); i++){
-    		drawNinePatch(nps.get(i), x, y, w, h);
-    	}
-    }
-    
-    protected void drawNinePatchImages(ArrayList<NinePatchImage> nps){
-    	for(int i = 0; i < nps.size(); i++){
-    		NinePatchImage n = nps.get(i);
-    		drawNinePatch(n.N, n.X, n.W, n.W, n.H);
-    	}
-    }
-    
-    protected void drawNinePatch(NinePatch n, int x, int y, int w, int h){
-    	n.draw(batch, x, y, w, h);
     }
     
     protected void drawTileImages(ArrayList<TileImage> ti, float opacity){
