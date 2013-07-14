@@ -1,6 +1,6 @@
 package universe;
 
-public class Tile {
+public abstract class Tile {
 	public int TEXTURE = 0;
 	public boolean BLOCKED = false;
 	

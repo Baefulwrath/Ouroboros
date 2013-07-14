@@ -9,6 +9,7 @@ public class NinePatchImage {
 	public int W = 0;
 	public int H = 0;
 	public NinePatch N;
+
 	public NinePatchImage(NinePatch n, int x, int y, int w, int h){
 		N = n;
 		X = x;
