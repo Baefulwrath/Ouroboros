@@ -9,7 +9,10 @@ import ui.Menu;
 import ui.Button;
 import ui.Message;
 import ui.TextArea;
+import universe.SideScrollerWorld;
 import universe.Tile;
+import universe.TopDownWorld;
+import universe.World;
 
 import assets.AnimatedImage;
 import assets.AnimatedNinePatch;
@@ -269,5 +272,13 @@ public abstract class Renderer {
     protected void drawTile(Tile t, int x, int y, int w, int h, float opacity){
 //SKRIV FÄRDIGT KODEN HÄR.
     	drawString("TILE", x, y, AssetHandler.debugLabelStyle, opacity);
+    }
+    
+    protected void drawTDWorld(TopDownWorld w){
+    	
+    }
+    
+    protected void drawSSWorld(SideScrollerWorld w){
+    	
     }
 }
