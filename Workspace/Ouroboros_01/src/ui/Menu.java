@@ -14,7 +14,7 @@ import rendering.RenderingHandler;
 public abstract class Menu extends UIObject{
 	
 	public ArrayList<Button> buttons = new ArrayList<Button>();
-	public ArrayList<TextArea> textAreas = new ArrayList<TextArea>();
+	public ArrayList<TextLine> textLines = new ArrayList<TextLine>();
 	public static int itemInterval = 10;
 
 	public Menu(String title, String script) {
@@ -32,9 +32,6 @@ public abstract class Menu extends UIObject{
 		for(int i = 0; i < m.buttons.size(); i++){
 			addButton(m.buttons.get(i));
 		}
-		for(int i = 0; i < m.textAreas.size(); i++){
-			addTextArea(m.textAreas.get(i));
-		}
 		BOX = m.BOX;
 		OPACITY = m.OPACITY;
 		RENDERTITLE = m.RENDERTITLE;
@@ -43,7 +40,7 @@ public abstract class Menu extends UIObject{
 	}
 
 	public void addButton(String text, String script, int x, int y, int w, int h, ButtonStyle bs){
-		buttons.add(new Button(text, script, new Rectangle(x + BOX.x, y + BOX.y, w, h), bs));
+		addButton(new Button(text, script, new Rectangle(x + BOX.x, y + BOX.y, w, h), bs));
 	}
 	
 	public void addButton(String text, String script, int index, int w, int h, ButtonStyle bs){
@@ -58,24 +55,24 @@ public abstract class Menu extends UIObject{
 		buttons.add(b);
 	}
 	
-	public void addTextArea(String t, int x, int y, int w, int h, LabelStyle ls){
-		textAreas.add(new TextArea(t, x + BOX.x, y + BOX.y, w, h, ls));
+	public void addTextLine(String text, int x, int y, int w, int h, LabelStyle ls){
+		addTextLine(new TextLine(text, new Rectangle(x, y, w, h), ls));
 	}
 	
-	public void addTextArea(String t, int index, int w, int h, LabelStyle ls){
-		addTextArea(t, 20, getCurrentY() - 100, w, h, ls);
+	public void addTextLine(String text, int index, int w, int h, LabelStyle ls){
+		addTextLine(text, 20, getCurrentY() - 100, w, h, ls);
 	}
 	
-	public void addTextArea(String t, int w, int h, LabelStyle ls){
-		addTextArea(t, getIndex(), w, h, ls);
+	public void addTextLine(String text, int w, int h, LabelStyle ls){
+		addTextLine(text, getIndex(), w, h, ls);
 	}
 	
-	public void addTextArea(TextArea ta){
-		textAreas.add(ta);
+	public void addTextLine(TextLine t){
+		textLines.add(t);
 	}
 	
 	private int getIndex(){
-		return buttons.size() + getTextAreaRows();
+		return buttons.size() + textLines.size();
 	}
 	
 	private int getCurrentY(){
@@ -83,20 +80,7 @@ public abstract class Menu extends UIObject{
 		for(int i = 0; i < buttons.size(); i++){
 			y -= buttons.get(i).BOX.height + itemInterval;
 		}
-		for(int i = 0; i < textAreas.size(); i++){
-			for(int i2 = 0; i2 < textAreas.get(i).TEXT.length; i2++){
-				y -= textAreas.get(i).getHeight() + itemInterval;
-			}
-		}
 		return y;
-	}
-	
-	private int getTextAreaRows() {
-		int temp = 0;
-		for(int i = 0; i < textAreas.size(); i++){
-			temp += textAreas.get(i).TEXT.length;
-		}
-		return temp;
 	}
 	
 	@Override

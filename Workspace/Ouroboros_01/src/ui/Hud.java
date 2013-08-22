@@ -22,7 +22,6 @@ public abstract class Hud extends UIObject{
 	
 	public String group[] = new String[0];
 	public ArrayList<Label> labels = new ArrayList<Label>();
-	public ArrayList<TextArea> textAreas = new ArrayList<TextArea>();
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 	public ArrayList<CollisionArea> collisionAreas = new ArrayList<CollisionArea>();
 	public ArrayList<Image> images = new ArrayList<Image>();
@@ -63,10 +62,6 @@ public abstract class Hud extends UIObject{
 		Label l = new Label(title, ls);
 		l.setPosition(x, y);
 		labels.add(l);
-	}
-	
-	public void addTextArea(String text, int x, int y, int w, int h, LabelStyle ls){
-		textAreas.add(new TextArea(text, x, y, w, h, ls));
 	}
 	
 	public void addButton(String title, String script, int x, int y, int w, int h, ButtonStyle bs){

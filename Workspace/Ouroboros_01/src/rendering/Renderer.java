@@ -9,6 +9,7 @@ import ui.Menu;
 import ui.Button;
 import ui.Message;
 import ui.TextArea;
+import ui.TextLine;
 import universe.SideScrollerWorld;
 import universe.Tile;
 import universe.TopDownWorld;
@@ -199,7 +200,7 @@ public abstract class Renderer {
     
     protected void drawMenu(Menu m){
     	drawButtons(m.buttons, m.OPACITY);
-    	drawTextAreas(m.textAreas, m.OPACITY);
+    	drawTextLines(m.textLines, m.OPACITY);
     	if(m.RENDERTITLE){
     		drawString(m.TITLE, m.BOX.x, m.BOX.y, AssetHandler.titleLabelStyle, 1.0f);
     		drawString("_____________________", m.BOX.x, m.BOX.y - 6, AssetHandler.titleLabelStyle, 1.0f);
@@ -217,24 +218,21 @@ public abstract class Renderer {
     	}
     }
     
-    protected void drawTextAreas(ArrayList<TextArea> t, float opacity){
+    protected void drawTextLines(ArrayList<TextLine> t, float opacity){
     	for(int i = 0; i < t.size(); i++){
-    		drawTextArea(t.get(i), opacity);
+    		drawTextLine(t.get(i), opacity);
     	}
     }
     
-    protected void drawTextArea(TextArea ta, float opacity){
-    	if(ta.RENDERBACKGROUND){
-    		drawImage(ta.BACKGROUND, ta.BOX);
+    protected void drawTextLine(TextLine tl, float opacity){
+    	if(tl.RENDERBACKGROUND){
+    		drawImage(tl.BACKGROUND, tl.BOX);
     	}
-    	for(int i = 0; i < ta.TEXT.length; i++){
-    		ta.TEXT[i].draw(batch, opacity);
-    	}
+    	drawString(tl.TEXT, tl.BOX, tl.STYLE, opacity);
     }
     
     protected void drawHud(Hud h){
     	drawLabels(h.labels, h.OPACITY);
-    	drawTextAreas(h.textAreas, h.OPACITY);
     	drawButtons(h.buttons, h.OPACITY);
     	drawNinePatchImages(h.ninePatches);
     	drawTileImages(h.tileImages, h.OPACITY);
