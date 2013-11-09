@@ -1,8 +1,7 @@
 package input;
 
-import ouroboros.OS;
-import ouroboros.ProgramState;
-import ui.UIHandler;
+import master.Master;
+import master.ProgramState;
 
 import static input.InputHandler.*;
 
@@ -53,9 +52,9 @@ public abstract class InputManager {
 	}
 	
 	protected InputRegion getRegion(){
-		if(OS.paused){
+		if(Master.paused){
 			return pausedInput;
-		}else if(UIHandler.intersects(staticMouse)){
+		}else if(________){
 			return UiInput;
 		}else{
 			return restInput;

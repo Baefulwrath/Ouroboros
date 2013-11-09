@@ -4,10 +4,11 @@ package rendering;
 import java.util.HashMap;
 import java.util.Map;
 
-import ouroboros.OS;
-import ouroboros.ProgramNode;
-import static ouroboros.ProgramState.*;
-import ouroboros.ProgramState;
+import master.Master;
+import master.ProgramNode;
+import master.ProgramState;
+
+import static master.ProgramState.*;
 import rendering.renderers.*;
 
 import static com.badlogic.gdx.Gdx.*;
@@ -146,6 +147,6 @@ public class RenderingHandler extends ProgramNode{
     }
     
     public static Renderer getRenderer(){
-    	return renderers.get(OS.state);
+    	return renderers.get(Master.state);
     }
 }

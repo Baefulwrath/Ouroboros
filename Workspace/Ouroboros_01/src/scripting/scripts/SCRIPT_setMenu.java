@@ -1,13 +1,13 @@
 package scripting.scripts;
 
 import scripting.Script;
-import ui.UIHandler;
+import scripting.ScriptHandler;
 
 public class SCRIPT_setMenu extends Script{
 
 	@Override
 	public void activate(String line) {
-		UIHandler.setMenu(line);
+		ScriptHandler.addLine("print_UNAVAILABLE");
 	}
 
 }

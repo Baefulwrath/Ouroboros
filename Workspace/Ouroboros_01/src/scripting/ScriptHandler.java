@@ -5,10 +5,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ouroboros.NodeType;
-import ouroboros.OS;
-import ouroboros.ProgramNode;
-import ui.UIHandler;
+import master.NodeType;
+import master.Master;
+import master.ProgramNode;
+
 import scripting.scripts.*;
 
 public class ScriptHandler extends ProgramNode{

@@ -23,12 +23,10 @@ public class INRE_DEFAULT_UI extends InputRegion{
 
 	@Override
 	public void touchDown(int screenX, int screenY, int pointer, int button) {
-		touchDownUI();
 	}
 
 	@Override
 	public void touchUp(int screenX, int screenY, int pointer, int button) {
-		touchUpUI();
 	}
 
 	@Override

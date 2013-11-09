@@ -1,6 +1,7 @@
-package ouroboros.client;
+package master.client;
 
-import ouroboros.OS;
+import master.Master;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
@@ -14,6 +15,6 @@ public class GwtLauncher extends GwtApplication {
 
 	@Override
 	public ApplicationListener getApplicationListener () {
-		return new OS();
+		return new Master();
 	}
 }

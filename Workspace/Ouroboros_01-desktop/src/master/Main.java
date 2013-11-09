@@ -1,4 +1,4 @@
-package ouroboros;
+package master;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import master.Master;
+import master.ProgramState;
 
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -22,7 +25,7 @@ public class Main {
 			cfg.height = dim.height;
 		}
 		
-		new LwjglApplication(new OS(startupState, defaultMenu), cfg);
+		new LwjglApplication(new Master(startupState, defaultMenu), cfg);
 	}
 	
 	public static boolean getSystemRes = false;

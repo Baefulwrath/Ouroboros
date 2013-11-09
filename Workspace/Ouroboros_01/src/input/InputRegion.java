@@ -1,7 +1,5 @@
 package input;
 
-import ui.UIHandler;
-
 public abstract class InputRegion {
 	
 	public InputRegionType type = InputRegionType.PAUSED;
@@ -25,12 +23,4 @@ public abstract class InputRegion {
 	public abstract void mouseMoved(int screenX, int screenY);
 
 	public abstract void scrolled(int amount);
-	
-	public void touchDownUI(){
-		UIHandler.touchDown();
-	}
-	
-	public void touchUpUI(){
-		UIHandler.touchUp();
-	}
 }

@@ -1,6 +1,6 @@
 package input.managers;
 
-import ouroboros.ProgramState;
+import master.ProgramState;
 import input.*;
 import input.regions.*;
 

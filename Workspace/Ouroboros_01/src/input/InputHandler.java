@@ -4,9 +4,10 @@ import input.managers.*;
 
 import java.util.HashMap;
 
-import ouroboros.OS;
-import ouroboros.ProgramNode;
-import ouroboros.ProgramState;
+import master.Master;
+import master.ProgramNode;
+import master.ProgramState;
+
 
 import rendering.RenderingHandler;
 
@@ -25,7 +26,7 @@ public class InputHandler extends ProgramNode implements InputProcessor{
     }
     
     public static InputManager getManager(){
-    	return getManager(OS.state);
+    	return getManager(Master.state);
     }
     
     public static InputManager getManager(ProgramState state){

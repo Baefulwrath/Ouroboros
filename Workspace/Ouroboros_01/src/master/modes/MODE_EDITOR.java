@@ -1,7 +1,7 @@
-package ouroboros.modes;
+package master.modes;
 
-import ouroboros.ProgramMode;
-import ouroboros.ProgramState;
+import master.ProgramMode;
+import master.ProgramState;
 
 public class MODE_EDITOR extends ProgramMode{
 

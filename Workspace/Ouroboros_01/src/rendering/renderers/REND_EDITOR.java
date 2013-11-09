@@ -1,6 +1,6 @@
 package rendering.renderers;
 
-import ouroboros.ProgramState;
+import master.ProgramState;
 import assets.AssetHandler;
 
 import com.badlogic.gdx.graphics.Color;

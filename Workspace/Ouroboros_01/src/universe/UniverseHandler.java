@@ -1,6 +1,6 @@
 package universe;
 
-import ouroboros.ProgramNode;
+import master.ProgramNode;
 
 public class UniverseHandler extends ProgramNode{
 	

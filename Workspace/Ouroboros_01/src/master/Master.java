@@ -1,32 +1,31 @@
-package ouroboros;
+package master;
 
 import input.InputHandler;
 
 import java.util.HashMap;
 
-import ouroboros.modes.*;
+import master.modes.*;
+
 
 import rendering.RenderingHandler;
 import scripting.ScriptHandler;
-import ui.UIHandler;
 
 import assets.AssetHandler;
 
 import com.badlogic.gdx.ApplicationListener;
 import static com.badlogic.gdx.Gdx.*;
 
-import static ouroboros.ProgramState.*;
+import static master.ProgramState.*;
 
-public class OS implements ApplicationListener {
+public class Master implements ApplicationListener {
 	public static ProgramState state = DEFAULT;
 	public static HashMap<ProgramState, ProgramMode> modes = new HashMap<ProgramState, ProgramMode>();
 	public static boolean paused = false;
 	public static boolean exitProgram = false;
 	public static InputHandler inputhandler = new InputHandler();
 	
-	public OS(ProgramState startupState, String defaultMenu){
+	public Master(ProgramState startupState, String defaultMenu){
     	state = startupState;
-    	UIHandler.setDefaultMenu(defaultMenu);
     }
 	
 	@Override
@@ -36,7 +35,6 @@ public class OS implements ApplicationListener {
 		setupModes();
 		inputhandler.setup();
 		input.setInputProcessor(inputhandler);
-		UIHandler.setup();
 		ScriptHandler.setup();
 	}
 	
@@ -51,7 +49,6 @@ public class OS implements ApplicationListener {
 	public void dispose() {
 		RenderingHandler.dispose();
 		AssetHandler.dispose();
-		UIHandler.dispose();
 		ScriptHandler.dispose();
 	}
 
@@ -89,7 +86,6 @@ public class OS implements ApplicationListener {
 	}
 	
 	public void updateGeneral(){
-		UIHandler.update(InputHandler.staticMouse);
 		ScriptHandler.update();
 		RenderingHandler.render();
 	}

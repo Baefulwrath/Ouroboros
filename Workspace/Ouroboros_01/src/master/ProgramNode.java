@@ -1,4 +1,4 @@
-package ouroboros;
+package master;
 
 import java.util.HashMap;
 

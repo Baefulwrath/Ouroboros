@@ -1,6 +1,6 @@
-package ouroboros;
+package master;
 
-import static ouroboros.ProgramState.*;
+import static master.ProgramState.*;
 
 public abstract class ProgramMode {
 

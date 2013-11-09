@@ -3,13 +3,8 @@ package rendering;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import ouroboros.ProgramState;
-import ui.Hud;
-import ui.Menu;
-import ui.Button;
-import ui.Message;
-import ui.TextArea;
-import ui.TextLine;
+import master.ProgramState;
+
 import universe.SideScrollerWorld;
 import universe.Tile;
 import universe.TopDownWorld;
@@ -185,66 +180,6 @@ public abstract class Renderer {
     
     protected void drawNinePatchImage(NinePatchImage n){
     	drawNinePatch(n.N, n.BOX.x, n.BOX.y, n.BOX.width, n.BOX.height);
-    }
-    
-    protected void drawButton(Button b, float opacity){
-    	drawNinePatch(b.getTex(), b.BOX, Color.WHITE);
-    	drawString(b.TITLE + " - " + b.ACTIVE + " - " + b.HOVER + " - " + b.READY, b.BOX.x + b.TITLEX, b.BOX.y + b.getTextY(), b.getLabelStyle(), opacity);
-    }
-    
-    protected void drawButtons(ArrayList<Button> bs, float opacity){
-    	for(int i = 0; i < bs.size(); i++){
-    		drawButton(bs.get(i), opacity);
-    	}
-    }
-    
-    protected void drawMenu(Menu m){
-    	drawButtons(m.buttons, m.OPACITY);
-    	drawTextLines(m.textLines, m.OPACITY);
-    	if(m.RENDERTITLE){
-    		drawString(m.TITLE, m.BOX.x, m.BOX.y, AssetHandler.titleLabelStyle, 1.0f);
-    		drawString("_____________________", m.BOX.x, m.BOX.y - 6, AssetHandler.titleLabelStyle, 1.0f);
-    	}
-    }
-    
-    protected void drawMessages(ArrayList<Message> m, float x, float y, boolean up){
-    	LabelStyle style = AssetHandler.messageLabelStyle;
-    	for(int i = 0; i < m.size(); i++){
-    		if(up){
-    			drawString(m.get(i).TEXT, x, y + (i * (style.font.getCapHeight() + 3)), style, 0.5f);
-    		}else{
-    			drawString(m.get(i).TEXT, x, y - (i * (style.font.getCapHeight() + 3)) - style.font.getCapHeight(), style, 0.5f);
-    		}
-    	}
-    }
-    
-    protected void drawTextLines(ArrayList<TextLine> t, float opacity){
-    	for(int i = 0; i < t.size(); i++){
-    		drawTextLine(t.get(i), opacity);
-    	}
-    }
-    
-    protected void drawTextLine(TextLine tl, float opacity){
-    	if(tl.RENDERBACKGROUND){
-    		drawImage(tl.BACKGROUND, tl.BOX);
-    	}
-    	drawString(tl.TEXT, tl.BOX, tl.STYLE, opacity);
-    }
-    
-    protected void drawHud(Hud h){
-    	drawLabels(h.labels, h.OPACITY);
-    	drawButtons(h.buttons, h.OPACITY);
-    	drawNinePatchImages(h.ninePatches);
-    	drawTileImages(h.tileImages, h.OPACITY);
-    	if(h.RENDERTITLE){
-    		drawString(h.TITLE, h.BOX.x, h.BOX.y, AssetHandler.titleLabelStyle, h.OPACITY);
-    	}
-    }
-    
-    protected void drawHuds(Hud[] h){
-    	for(int i = 0; i < h.length; i++){
-    		drawHud(h[i]);
-    	}
     }
     
     protected void drawLabels(ArrayList<Label> l, float opacity){

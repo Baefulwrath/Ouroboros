@@ -4,7 +4,8 @@ import static com.badlogic.gdx.Gdx.*;
 
 import java.util.HashMap;
 
-import ouroboros.ProgramNode;
+import master.ProgramNode;
+
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;

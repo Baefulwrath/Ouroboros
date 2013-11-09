@@ -1,4 +1,4 @@
-package ouroboros;
+package master;
 
 public enum ProgramState {
     DEFAULT, MENU, GAME, EDITOR;
